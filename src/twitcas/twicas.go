@@ -220,7 +220,7 @@ func TwitcasRecord(user, proxy string) (done, dbLocked bool) {
 			return
 		}
 
-		c, in, err := ffmpeg.Open("-i", "-", "-c", "copy", "-y", filename)
+		c, in, err := ffmpeg.Open("-re","-reconnect_at_eof 1","-reconnect_streamed 1","-reconnect_delay_max 8","-index_correction index_correction 1","-i", "-", "-c", "copy", "-y", filename)
 		if err != nil {
 			return
 		}
